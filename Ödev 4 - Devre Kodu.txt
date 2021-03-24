@@ -1,0 +1,32 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12, 11, 6, 5, 4, 3);
+
+#define potPinDC A0
+#define led 13
+#define motorPinDC 9
+int girisDC, cikisDC, potDeger, ledDeger;
+void setup() {
+
+lcd.begin(16, 2);
+pinMode(led,OUTPUT);
+pinMode(motorPinDC, OUTPUT);
+pinMode(potPinDC, INPUT);
+}
+void loop() {
+
+girisDC = analogRead(potPinDC);
+cikisDC = map(girisDC, 0, 1023, 0, 255);
+potDeger = analogRead(potPinDC);
+lcd.setCursor(0,0);
+lcd.print("Motor Hiz: ");
+lcd.print(potDeger);
+ledDeger = map(potDeger,0,1023,0,255);
+if(ledDeger<=125)
+  digitalWrite(led,LOW);
+else
+{
+  digitalWrite(led,HIGH);
+  }
+delay(100);
+lcd.clear();
+}
